@@ -1,0 +1,126 @@
+clear
+
+%% this script will get a nx100 circularly shuffled matx for each mouse and it will
+%% be saved in "SpontAltSpikesAroundAlts" in matlab folder
+%% this also gets lme tables
+
+
+%also need to do for correct and incorrect alternations
+%% iscpx start frames
+startFrame6025 = 88;
+startFrame6026 = 113;
+startFrame6027 = 119;
+startFrame6028 = 278;
+startFrame6029 = 127;
+startFrame6039 = 83;
+startFrame6041 =151;
+
+%startFrame6412 = 166.35;
+%startFrame6416 = 172.1;
+startFrame6412_2 = 113;
+startFrame6416_2 = 422;
+
+%% vvv need to put 6412_2 and 6416_2 here vvv
+startFrame6417 = 597.4;
+startFrame6431 = 262.39;
+
+%% times around Right Turns 
+times6025 = [24.8,183.79,216.4,228.53, 256.53,310.74,343.46,378.13,490.93,542.4];
+times6026 = [27.47,60.94,83.01,147.6,184.21,219.34,250.21,269.81,360.8,416.27,...
+    546.86,576.13];
+times6027 = [20.06,34.99,40.06,55.6,87.33,106,119.66,134.06,148,165.66,192.06,...
+    243.06,262.46,282.46,294.53,315.06,328.38,338.99,354.93,368.86,389.52,443.98,...
+    461.86,550.93,564.99,590.05,597.06,642.45,657.86];
+times6028 = [437.07];
+times6029 = [112.67,123.14,134.67,148.46,198.59,231.6,273.39,300.19,332.26,342.74,...
+    380.19,420.19,440.86,468.32,575.73,616.32,684.59];
+times6039 =[82.59,122.26,167.73,186.74,225.26,460.59,489.66,525.79,533.52,...
+557.46,585.52,589.05,614.65];
+times6041 = [69.46,113.18,143.86,161.86,214.66,225.25,238.38,257.58,265.86,...
+    400.13,460.05,468.45,491.79,565.25,571.58,576.72,593.06];
+
+% new mice 
+times6412_2 = [ 43.88,51.79,99.78,121.92,147.5,159.64,202.18,...
+    229.55,245.07,281.86,309.37,316.81,419.41,470.65,482,511.73,...
+    571.52,583.08,604.14,612.72,632.27,757,767.67,794.46,...
+    809.66,826.28,864.73,947.21,967.33,979.84,992,1002];
+
+times6416_2 = [39.96,49.32,55.21,59.24,72.07,77.25,86.19,...
+    95.11,103.48,109.48,167.11,198.89,207.53,218.96,...
+    231.86,254.97,284.32,307.46,323.78,360,373.12,386.71,...
+    419.33,437.43,449.14,501.6,519.41,559.37,706,727.85,...
+    779.1,796.07,845.14,877,890.29,904.36,926.67];
+
+times6417 = [57.86,68.22,112.29,163.78,202.55,372.17,440.22,...
+    504.74];
+
+times6431 = [55.96,89.89,96.96,105.57,183.68,204.77,230.48,...
+    266.57,276.75,301.64,314.97,350,380,407.86,498.44,525.77,...
+    713,756.83,778.44,936.73];
+
+
+%% times around Left Turns - up to date w precise #s
+times6025_inc = [36.13,52.67,55.41,113.47,437.14,589.86];
+times6026_inc = [34.34,41.01,46.74,54.27,74.67,104.61,115.47,134.4,164.06,...
+    196.86,210.54,297.94,308.14,324.21,339.81,369.81,396.61,429.73,443.87,...
+459.41,522.19,566.34,647.79,678.53];
+times6027_inc = [28.46,46.53,72.46,209.98,228.72,428.99,511.33,537.98,681.05];
+times6028_inc = [365.34,410,522.61,562.99,594.46];
+times6029_inc = [29.2,40.86,52.93,60.67,77.33,86.59,98.06,171.73,218.4,243.87,...
+    364.86,519.66,644.06,668.32];
+times6039_inc = [314.8,342.13,366.86,411.33,512.53];
+times6041_inc = [35.58,44.38,58.86,131.39,205.86,313.98,328.32,350.19,376.59,...
+    388.05,412.13,430.59,477.12,499.31,517.52,533.06,545.58,611.86,629.86,...
+647.25,657.46];
+
+% new mice 
+
+times6412_2_inc = [28.86,115,133.52,174.68,188.44,216.48,256.37,324.69,331.85,...
+    345.3,349.25,381.12,391.11,410.19,431.21,448.5,456.23,524.17,541.69,...
+    553.75,596.61,643.2,683.14,705.33,730.3,778.71,833.07,848.43,...
+    934.82];
+
+times6416_2_inc = [65.68,119.14,127.44,143.68,159.69,327.08,402.36,...
+    430.46,592.18,640,657.48,675.5,737.82,862,880.52,];
+
+times6417_inc = [77,87,124.41,180.72,252];
+
+times6431_inc = [68.59,117.79,123.77,141,145.56,244.56,450.27,458.59,...
+    648,677.72,831.59,907.17];
+
+
+%% 5x+ 
+spikeRateMatx6025 = getSpikesAroundAlts(readtable('SpontAlt/spikes6025.csv'),'6025CorrectAlts',...
+    times6025,startFrame6025,1,"6025",1,15);
+
+spikeRateMatx6026 = getSpikesAroundAlts(readtable('SpontAlt/spikes6026.csv'),'6026CorrectAlts',...
+    times6026,startFrame6026,1,"6026",1,15);
+
+spikeRateMatx6027 = getSpikesAroundAlts(readtable('SpontAlt/spikes6027.csv'),'6027CorrectAlts',...
+    times6027,startFrame6027,1,"6027",1,15);
+
+spikeRateMatx6028 = getSpikesAroundAlts(readtable('SpontAlt/spikes6028.csv'),'6028CorrectAlts',...
+    times6028,startFrame6028,1,"6028",1,15);
+
+spikeRateMatx6029 = getSpikesAroundAlts(readtable('SpontAlt/spikes6029.csv'),'6029CorrectAlts',...
+    times6029,startFrame6029,1,"6029",1,15);
+
+%% 5x-
+spikeRateMatx6039 = getSpikesAroundAlts(readtable('SpontAlt/spikes6039.csv'),'6039CorrectAlts',...
+    times6039,startFrame6039,1,"6039",-1,15);
+
+spikeRateMatx6041 = getSpikesAroundAlts(readtable('SpontAlt/spikes6041.csv'),'6041CorrectAlts',...
+    times6041,startFrame6041,1,"6041",-1,15);
+
+%% new 5x- mice 
+spikeRateMatx6412 = getSpikesAroundAlts(readtable('SpontAlt/events_6412_2nd.csv'),'6412CorrectAlts',...
+    times6412_2,startFrame6412_2,1,"6412",-1,28.29);
+
+spikeRateMatx6416 = getSpikesAroundAlts(readtable('SpontAlt/events_6416_2nd.csv'),'6416CorrectAlts',...
+    times6416_2,startFrame6416_2,1,"6416",-1,27.66);
+
+spikeRateMatx6417 = getSpikesAroundAlts(readtable('SpontAlt/events_6417_first.csv'),'6417CorrectAlts',...
+    times6417,startFrame6417,1,"6417",-1,28.77);
+
+spikeRateMatx6431 = getSpikesAroundAlts(readtable('SpontAlt/events_6431.csv'),'6431CorrectAlts',...
+    times6431,startFrame6431,1,"6431",-1,28.77);
