@@ -11,7 +11,9 @@ Programs should be run in this order for all folders:
 2. testCircShuffFunc_Inc.m
 3. testGetSpikesAroundAlts_correctAlts.m
 4. testGetSpikesAroundAlts_Inc.m
-5. Any other program
+5. spontAlt_task1_AllMice_corrAlts.m
+6. spontAlt_task1_AllMice_incAlts.m
+7. any other program
 
 Notes:
 
